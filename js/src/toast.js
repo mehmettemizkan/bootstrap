@@ -184,6 +184,7 @@ class Toast {
   // Private
 
   _positionToast() {
+    this._clearPositioning()
     this._element.style.position = 'absolute'
     const toastList = SelectorEngine.find(`.toast.${this._config.position}`, this._element.parentNode)
     const styles = {}
