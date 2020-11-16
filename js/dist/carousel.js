@@ -5,7 +5,7 @@
   */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('./dom/data.js'), require('./dom/event-handler.js'), require('./dom/manipulator.js'), require('./dom/selector-engine.js')) :
-  typeof define === 'function' && define.amd ? define(['./dom/data.js', './dom/event-handler.js', './dom/manipulator.js', './dom/selector-engine.js'], factory) :
+  typeof define === 'function' && define.amd ? define(['./dom/data', './dom/event-handler', './dom/manipulator', './dom/selector-engine'], factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Carousel = factory(global.Data, global.EventHandler, global.Manipulator, global.SelectorEngine));
 }(this, (function (Data, EventHandler, Manipulator, SelectorEngine) { 'use strict';
 
@@ -147,6 +147,8 @@
     }
   };
 
+  var isRTL = document.documentElement.dir === 'rtl';
+
   function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
   function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -204,8 +206,8 @@
   var CLASS_NAME_CAROUSEL = 'carousel';
   var CLASS_NAME_ACTIVE = 'active';
   var CLASS_NAME_SLIDE = 'slide';
-  var CLASS_NAME_RIGHT = 'carousel-item-right';
-  var CLASS_NAME_LEFT = 'carousel-item-left';
+  var CLASS_NAME_END = 'carousel-item-end';
+  var CLASS_NAME_START = 'carousel-item-start';
   var CLASS_NAME_NEXT = 'carousel-item-next';
   var CLASS_NAME_PREV = 'carousel-item-prev';
   var CLASS_NAME_POINTER_EVENT = 'pointer-event';
@@ -574,11 +576,11 @@
       var eventDirectionName;
 
       if (direction === DIRECTION_NEXT) {
-        directionalClassName = CLASS_NAME_LEFT;
+        directionalClassName = CLASS_NAME_START;
         orderClassName = CLASS_NAME_NEXT;
         eventDirectionName = DIRECTION_LEFT;
       } else {
-        directionalClassName = CLASS_NAME_RIGHT;
+        directionalClassName = CLASS_NAME_END;
         orderClassName = CLASS_NAME_PREV;
         eventDirectionName = DIRECTION_RIGHT;
       }

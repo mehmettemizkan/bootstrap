@@ -5,7 +5,7 @@
   */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('./dom/data.js'), require('./dom/event-handler.js'), require('./dom/manipulator.js'), require('popper.js'), require('./dom/selector-engine.js')) :
-  typeof define === 'function' && define.amd ? define(['./dom/data.js', './dom/event-handler.js', './dom/manipulator.js', 'popper.js', './dom/selector-engine.js'], factory) :
+  typeof define === 'function' && define.amd ? define(['./dom/data', './dom/event-handler', './dom/manipulator', 'popper.js', './dom/selector-engine'], factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Tooltip = factory(global.Data, global.EventHandler, global.Manipulator, global.Popper, global.SelectorEngine));
 }(this, (function (Data, EventHandler, Manipulator, Popper, SelectorEngine) { 'use strict';
 
@@ -155,6 +155,8 @@
       callback();
     }
   };
+
+  var isRTL = document.documentElement.dir === 'rtl';
 
   /**
    * --------------------------------------------------------------------------
@@ -322,9 +324,9 @@
   var AttachmentMap = {
     AUTO: 'auto',
     TOP: 'top',
-    RIGHT: 'right',
+    RIGHT: isRTL ? 'left' : 'right',
     BOTTOM: 'bottom',
-    LEFT: 'left'
+    LEFT: isRTL ? 'right' : 'left'
   };
   var Default = {
     animation: true,
@@ -671,6 +673,18 @@
       }
 
       return title;
+    };
+
+    _proto.updateAttachment = function updateAttachment(attachment) {
+      if (attachment === 'right') {
+        return 'end';
+      }
+
+      if (attachment === 'left') {
+        return 'start';
+      }
+
+      return attachment;
     } // Private
     ;
 
@@ -704,7 +718,7 @@
     };
 
     _proto._addAttachmentClass = function _addAttachmentClass(attachment) {
-      this.getTipElement().classList.add(CLASS_PREFIX + "-" + attachment);
+      this.getTipElement().classList.add(CLASS_PREFIX + "-" + this.updateAttachment(attachment));
     };
 
     _proto._getOffset = function _getOffset() {

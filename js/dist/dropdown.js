@@ -5,7 +5,7 @@
   */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('./dom/data.js'), require('./dom/event-handler.js'), require('./dom/manipulator.js'), require('popper.js'), require('./dom/selector-engine.js')) :
-  typeof define === 'function' && define.amd ? define(['./dom/data.js', './dom/event-handler.js', './dom/manipulator.js', 'popper.js', './dom/selector-engine.js'], factory) :
+  typeof define === 'function' && define.amd ? define(['./dom/data', './dom/event-handler', './dom/manipulator', 'popper.js', './dom/selector-engine'], factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Dropdown = factory(global.Data, global.EventHandler, global.Manipulator, global.Popper, global.SelectorEngine));
 }(this, (function (Data, EventHandler, Manipulator, Popper, SelectorEngine) { 'use strict';
 
@@ -101,6 +101,8 @@
     }
   };
 
+  var isRTL = document.documentElement.dir === 'rtl';
+
   function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
   function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -136,9 +138,9 @@
   var CLASS_NAME_DISABLED = 'disabled';
   var CLASS_NAME_SHOW = 'show';
   var CLASS_NAME_DROPUP = 'dropup';
-  var CLASS_NAME_DROPRIGHT = 'dropright';
-  var CLASS_NAME_DROPLEFT = 'dropleft';
-  var CLASS_NAME_MENURIGHT = 'dropdown-menu-right';
+  var CLASS_NAME_DROPEND = 'dropend';
+  var CLASS_NAME_DROPSTART = 'dropstart';
+  var CLASS_NAME_MENUEND = 'dropdown-menu-end';
   var CLASS_NAME_NAVBAR = 'navbar';
   var CLASS_NAME_POSITION_STATIC = 'position-static';
   var SELECTOR_DATA_TOGGLE = '[data-bs-toggle="dropdown"]';
@@ -146,12 +148,12 @@
   var SELECTOR_MENU = '.dropdown-menu';
   var SELECTOR_NAVBAR_NAV = '.navbar-nav';
   var SELECTOR_VISIBLE_ITEMS = '.dropdown-menu .dropdown-item:not(.disabled):not(:disabled)';
-  var PLACEMENT_TOP = 'top-start';
-  var PLACEMENT_TOPEND = 'top-end';
-  var PLACEMENT_BOTTOM = 'bottom-start';
-  var PLACEMENT_BOTTOMEND = 'bottom-end';
-  var PLACEMENT_RIGHT = 'right-start';
-  var PLACEMENT_LEFT = 'left-start';
+  var PLACEMENT_TOP = isRTL ? 'top-end' : 'top-start';
+  var PLACEMENT_TOPEND = isRTL ? 'top-start' : 'top-end';
+  var PLACEMENT_BOTTOM = isRTL ? 'bottom-end' : 'bottom-start';
+  var PLACEMENT_BOTTOMEND = isRTL ? 'bottom-start' : 'bottom-end';
+  var PLACEMENT_RIGHT = isRTL ? 'left-start' : 'right-start';
+  var PLACEMENT_LEFT = isRTL ? 'right-start' : 'left-start';
   var Default = {
     offset: 0,
     flip: true,
@@ -347,12 +349,12 @@
       var placement = PLACEMENT_BOTTOM; // Handle dropup
 
       if (parentDropdown.classList.contains(CLASS_NAME_DROPUP)) {
-        placement = this._menu.classList.contains(CLASS_NAME_MENURIGHT) ? PLACEMENT_TOPEND : PLACEMENT_TOP;
-      } else if (parentDropdown.classList.contains(CLASS_NAME_DROPRIGHT)) {
+        placement = this._menu.classList.contains(CLASS_NAME_MENUEND) ? PLACEMENT_TOPEND : PLACEMENT_TOP;
+      } else if (parentDropdown.classList.contains(CLASS_NAME_DROPEND)) {
         placement = PLACEMENT_RIGHT;
-      } else if (parentDropdown.classList.contains(CLASS_NAME_DROPLEFT)) {
+      } else if (parentDropdown.classList.contains(CLASS_NAME_DROPSTART)) {
         placement = PLACEMENT_LEFT;
-      } else if (this._menu.classList.contains(CLASS_NAME_MENURIGHT)) {
+      } else if (this._menu.classList.contains(CLASS_NAME_MENUEND)) {
         placement = PLACEMENT_BOTTOMEND;
       }
 

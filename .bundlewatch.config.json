@@ -10,7 +10,7 @@
     },
     {
       "path": "./dist/css/bootstrap-reboot.css",
-      "maxSize": "2 kB"
+      "maxSize": "2.25 kB"
     },
     {
       "path": "./dist/css/bootstrap-reboot.min.css",
@@ -33,12 +33,44 @@
       "maxSize": "22 kB"
     },
     {
+      "path": "./dist/css/bootstrap-grid.rtl.css",
+      "maxSize": "7 kB"
+    },
+    {
+      "path": "./dist/css/bootstrap-grid.rtl.min.css",
+      "maxSize": "6 kB"
+    },
+    {
+      "path": "./dist/css/bootstrap-reboot.rtl.css",
+      "maxSize": "2.25 kB"
+    },
+    {
+      "path": "./dist/css/bootstrap-reboot.rtl.min.css",
+      "maxSize": "2 kB"
+    },
+    {
+      "path": "./dist/css/bootstrap-utilities.rtl.css",
+      "maxSize": "7 kB"
+    },
+    {
+      "path": "./dist/css/bootstrap-utilities.rtl.min.css",
+      "maxSize": "6 kB"
+    },
+    {
+      "path": "./dist/css/bootstrap.rtl.css",
+      "maxSize": "24 kB"
+    },
+    {
+      "path": "./dist/css/bootstrap.rtl.min.css",
+      "maxSize": "22 kB"
+    },
+    {
       "path": "./dist/js/bootstrap.bundle.js",
       "maxSize": "50 kB"
     },
     {
       "path": "./dist/js/bootstrap.bundle.min.js",
-      "maxSize": "22 kB"
+      "maxSize": "22.25 kB"
     },
     {
       "path": "./dist/js/bootstrap.esm.js",
