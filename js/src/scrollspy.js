@@ -199,9 +199,7 @@ class ScrollSpy {
   _process() {
     const scrollTop = this._getScrollTop() + this._config.offset
     const scrollHeight = this._getScrollHeight()
-    const maxScroll = this._config.offset +
-      scrollHeight -
-      this._getOffsetHeight()
+    const maxScroll = this._config.offset + scrollHeight - this._getOffsetHeight()
 
     if (this._scrollHeight !== scrollHeight) {
       this.refresh()
@@ -226,8 +224,7 @@ class ScrollSpy {
     for (let i = this._offsets.length; i--;) {
       const isActiveTarget = this._activeTarget !== this._targets[i] &&
           scrollTop >= this._offsets[i] &&
-          (typeof this._offsets[i + 1] === 'undefined' ||
-              scrollTop < this._offsets[i + 1])
+          (typeof this._offsets[i + 1] === 'undefined' || scrollTop < this._offsets[i + 1])
 
       if (isActiveTarget) {
         this._activate(this._targets[i])

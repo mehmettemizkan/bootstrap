@@ -125,8 +125,7 @@ class Collapse {
   }
 
   show() {
-    if (this._isTransitioning ||
-      this._element.classList.contains(CLASS_NAME_SHOW)) {
+    if (this._isTransitioning || this._element.classList.contains(CLASS_NAME_SHOW)) {
       return
     }
 
@@ -213,8 +212,7 @@ class Collapse {
   }
 
   hide() {
-    if (this._isTransitioning ||
-      !this._element.classList.contains(CLASS_NAME_SHOW)) {
+    if (this._isTransitioning || !this._element.classList.contains(CLASS_NAME_SHOW)) {
       return
     }
 
